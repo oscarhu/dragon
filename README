@@ -1,0 +1,5 @@
+This is a simple Python game. It needs pygame to run - see http://pygame.org
+
+Run the game using 'python dragon.py'
+
+Choose to enter cave 1, 2, 3. There are three different ones and only one is friendly.
