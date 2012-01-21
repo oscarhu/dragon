@@ -1,5 +1,4 @@
-import random
-import time
+import random, time, sys, pygame
 
 def displayIntro():
     print('You are in a land full of dragons. In front of you,')
@@ -19,12 +18,12 @@ def chooseCave():
 
 def checkCave(chosenCave):
     print('You approach the cave...')
-    time.sleep(2)
+    #time.sleep(2)
     print('It is dark and spooky...')
-    time.sleep(2)
+    #time.sleep(2)
     print('A large dragon jumps out in front of you! He opens his jaws and...')
     print()
-    time.sleep(2)
+    #time.sleep(2)
 
     friendlyCave = random.randint(1, 3)
     robberCave = friendlyCave -1
@@ -34,27 +33,81 @@ def checkCave(chosenCave):
     badCave = friendlyCave +1
     if badCave >3:
         badCave -=3
+        
+    screen.blit(blackbox,allcaves[0])
+    screen.blit(blackbox,allcaves[1])
+    screen.blit(blackbox,allcaves[2])
+    screen.blit(black2, black2Rect)
     
-    if chosenCave == str(friendlyCave):
-         print('Gives you his treasure!')
+    if chosenCave == friendlyCave:
+        print('Gives you his treasure!')
+        screen.blit(friendly,allcaves[chosenCave-1])
+        screen.blit(money,moneyRect)
     else:
-        if chosenCave == str(robberCave):
+        if chosenCave == robberCave:
             print('robs all your stuff')
+            screen.blit(robber,allcaves[chosenCave-1])
+            screen.blit(robbed,robbedRect)
         else:
-            if chosenCave == str(badCave):
+            if chosenCave == badCave:
                 print('Gobbles you down in one bite!')
-            
+                screen.blit(bad,allcaves[chosenCave-1])
+                screen.blit(eaten,eatenRect)
     print('the friendly cave was ' + str(friendlyCave) )
     print('the robber cave was ' + str(robberCave) )
-    print('the badcave was ' + str(badCave) )   
-playAgain = 'yes'
-while playAgain == 'yes' or playAgain == 'y':
+    print('the badcave was ' + str(badCave) )
+    
+displayIntro()
 
-    displayIntro()
+pygame.init()
+ 
+size = width, height = 640, 480
 
-    caveNumber = chooseCave()
+screen = pygame.display.set_mode(size)
+ 
+caves = pygame.image.load("danger.gif")
+cavesrect = caves.get_rect()
 
-    checkCave(caveNumber)
+blackbox = pygame.image.load("blackbox.gif")
+black2 = pygame.image.load("black2.gif")
+black2Rect = pygame.Rect(139, 373, 362, 100)
 
-    print('Do you want to play again? (yes or no)')
-    playAgain = raw_input()
+eaten = pygame.image.load("eaten.gif")
+eatenRect = pygame.Rect(162,381, 316, 91)
+
+money = pygame.image.load("money.gif")
+moneyRect = pygame.Rect(141, 385, 359, 83)
+
+robbed = pygame.image.load("robbed.gif")
+robbedRect = pygame.Rect(196, 378, 249, 98)
+
+friendly = pygame.image.load("friendlydragon.gif")
+cave1 = pygame.Rect(59,292,50,50)
+
+bad = pygame.image.load("baddragon.png")
+cave2 = pygame.Rect(269,292,50,50)
+
+robber = pygame.image.load("robberdragon.gif")
+cave3 = pygame.Rect(471,292,50,50)
+
+allcaves=[cave1,cave2,cave3]
+
+screen.blit(caves, cavesrect)   
+
+pygame.display.flip()
+
+# Run the game
+while 1:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key==pygame.K_1:
+                print ('you pressed 1')
+                checkCave(1)
+            elif event.key==pygame.K_2:
+                print('you pressed 2 ')
+                checkCave(2)
+            elif event.key==pygame.K_3:
+                print('you pressed 3 ')
+                checkCave(3)
+            pygame.display.update()
