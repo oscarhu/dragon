@@ -1,5 +1,5 @@
-This is a simple Python game. It needs pygame to run - pygame is a set of python modules designed for writing games. you can download pygame at http://pygame.org
+This is a simple Python game. It needs pygame to run - pygame is a set of python modules designed for writing games. You can download pygame at http://pygame.org
 
 Run the game using 'python dragon.py'
 
-Choose to enter cave 1, 2, 3 by typing 1,2 or 3 on the keyboard. There are three different dragons and only one is friendly.
+Choose to enter cave 1, 2, 3 by typing 1, 2 or 3 on the keyboard. There are three different dragons and only one is friendly.
